@@ -82,21 +82,21 @@ def convertVOCtoYolo(file_path:str = "data/VOCdevkit/VOC2007/Annotations/*.xml")
   import shutil
   try:
     image_path = Path(__file__).parent / "data/VOCdevkit/VOC2007/JPEGImages"
-    # shutil.move(image_path , str(Path(__file__).parent.joinpath("data/image")))
-    # print("파일 이동 완료")    
-    # remove_path = Path(__file__).parent.joinpath("data/VOCdevkit")
-    # shutil.rmtree(remove_path)
-    # print("필요 없는 파일 제거 완료")
+    shutil.move(image_path , str(Path(__file__).parent.joinpath("data/image")))
+    print("파일 이동 완료")    
+    remove_path = Path(__file__).parent.joinpath("data/VOCdevkit")
+    shutil.rmtree(remove_path)
+    print("필요 없는 파일 제거 완료")
   except Exception as e:
     print(e , "파일 삭제 오류")
 
 if __name__ == "__main__":
   import yaml
-  with open(r"C:\Users\11kkh\Desktop\Pytorch\pytorch_models\yolov1\config\data.yaml" ,"r") as f:
+  with open(r"./config/data.yaml" ,"r") as f:
     data = yaml.safe_load(f)
   class_names = data["class_names"]
   class_mapping = {class_name :idx for idx , class_name in enumerate(class_names)}
-  # download_tarfile(url = "http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar" , target_dir="data")
+  download_tarfile(url = "http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar" , target_dir="data")
   print("Start Pascal VOC =>>>>> yoloformat ") 
   convertVOCtoYolo()
   
